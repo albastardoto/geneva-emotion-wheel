@@ -1,1 +1,1 @@
-import "./lib/Counter.svelte";
+import "./lib/gew.svelte";
