@@ -1,5 +1,5 @@
 {
-  "name": "genewa-emotion-wheel",
+  "name": "geneva-emotion-wheel",
   "version": "0.0.1",
   "license": "MIT",
   "scripts": {
@@ -23,14 +23,14 @@
   "svelte": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "type": "module",
-  "main": "./dist/index.js",
-  "module": "./dist/poly-ui.es.js",
+  "main": "./dist/gew.es.js",
+  "module": "./dist/gew.es.js",
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
-      "import": "./dist/poly-ui.es.js",
-      "require": "./dist/index.js",
-      "default": "./dist/index.js"
+      "import": "./dist/gew.es.js",
+      "require": "./dist/gew.es.js",
+      "default": "./dist/gew.es.js"
     },
     "./types": {
       "types": "./dist/custom-elements.d.ts",

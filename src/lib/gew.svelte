@@ -7,7 +7,8 @@
 			maxRadius: { attribute: 'max-radius', type: 'Number' },
 			minRadius: { attribute: 'max-radius', type: 'Number' },
 			tagOffset: { attribute: 'tag-offset', type: 'Number' },
-			selectionCallback: { attribute: 'selection-callback', type: 'Object' }
+			selectionCallback: { attribute: 'selection-callback', type: 'Object' },
+			selectedColor: { attribute: 'selected-color', type: 'String' }
 		}
 	}}
 />
@@ -17,6 +18,7 @@
 <script lang="ts">
 	import Emotion from './emotion.svelte';
 
+	import { onMount } from 'svelte';
 	let {
 		emotions = ['Sadness'],
 		maxRadius = 200,
@@ -24,14 +26,24 @@
 		minRadius = 50,
 		selectionCallback = (index, value) => {
 			console.log('Chose index : ' + index + ' with value ' + value);
-		}
+		},
+		selectedColor = '#3396e8'
 	} = $props();
 
 	let height = $state();
 	let width = $state();
+	let wheelElement;
+	onMount(() => {
+		wheelElement.style.setProperty('--checked-color', selectedColor);
+	});
 </script>
 
-<div class="wheel h-full" bind:clientWidth={width} bind:clientHeight={height}>
+<div
+	class="wheel h-full"
+	bind:clientWidth={width}
+	bind:clientHeight={height}
+	bind:this={wheelElement}
+>
 	{#each emotions as emotionName, index}
 		<Emotion
 			name={emotionName}
@@ -44,6 +56,7 @@
 			{tagOffset}
 			pair={index % 2 == 0}
 			{selectionCallback}
+			{selectedColor}
 		></Emotion>
 	{/each}
 </div>

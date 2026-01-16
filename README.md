@@ -1,38 +1,13 @@
-# sv
+# Geneva Emotion Wheel on the web
 
-Everything you need to build a Svelte project, powered by [`sv`](https://github.com/sveltejs/cli).
+The [Geneva Emotion Wheel](https://www.unige.ch/cisa/gew) (GEW) is a theoretically derived and empirically tested instrument to measure emotional reactions to objects, events, and situations.
 
-## Creating a project
+## Svelte and custom elements
 
-If you're seeing this, you've probably already done this step. Congrats!
+This implementation of the GEW was implemented using svelte but is exported as a
+custom web componenent that should be usable almost anywhere.
 
-```sh
-# create a new project in the current directory
-npx sv create
+### Why Custom Elements?
+While custom elements make it possible to reuse components across different frameworks, the larger benefit is reduced coupling. By separating your component library from a specific framework, you lower the cost and risk of future framework upgrades or migrations, even when the components are initially built for a single application.
 
-# create a new project in my-app
-npx sv create my-app
-```
 
-## Developing
-
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
-
-```sh
-npm run dev
-
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
-```
-
-## Building
-
-To create a production version of your app:
-
-```sh
-npm run build
-```
-
-You can preview the production build with `npm run preview`.
-
-> To deploy your app, you may need to install an [adapter](https://svelte.dev/docs/kit/adapters) for your target environment.

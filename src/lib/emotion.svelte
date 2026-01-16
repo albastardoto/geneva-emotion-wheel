@@ -1,8 +1,7 @@
 <script lang="ts">
 	import Option from './option.svelte';
-	import { EmotionSelectValueEvent } from './gew-constructor.ts';
-	import { createEventDispatcher } from 'svelte';
 	import { onMount } from 'svelte';
+	import { EmotionSelectValueEvent } from './gew-constructor.ts';
 	let values = [1, 2, 3, 4, 5];
 	let intensity = $state();
 	const {
@@ -15,7 +14,8 @@
 		minRadius,
 		tagOffset,
 		selectionCallback,
-		index
+		index,
+		selectedColor
 	} = $props();
 
 	const radial_distance = $derived(percentage * Math.PI * 2);
@@ -48,7 +48,7 @@
 		const percentageValue = index / (values.length - 1);
 		return minSize + (maxSize - minSize) * percentageValue;
 	}
-	let tagElement;
+	let tagElement: HTMLElement;
 
 	$effect(() => {
 		const top = tagPos.y - tagHeight / 2;
@@ -56,9 +56,13 @@
 		tagElement.style.top = top + 'px';
 		tagElement.style.left = left + 'px';
 	});
+	onMount(() => {
+		if (pair) tagElement.class += 'tagDark';
+	});
 	function updateSelection(e) {
 		const value = e.target.value;
 		const selectionEvent = new EmotionSelectValueEvent(index, value);
+		console.log('something was selected');
 		tagElement.dispatchEvent(selectionEvent);
 	}
 </script>
@@ -74,10 +78,11 @@
 		{pair}
 		{index}
 		{updateSelection}
+		{selectedColor}
 	></Option>
 {/each}
 <div
-	class="tag {pair ? 'tagDark' : ''}"
+	class="tag"
 	bind:this={tagElement}
 	bind:clientWidth={tagWidth}
 	bind:clientHeight={tagHeight}

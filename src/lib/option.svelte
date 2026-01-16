@@ -1,61 +1,65 @@
 <script lang="ts">
-	import {onMount} from "svelte";
-	let {top,left, height,width, group,name, index, pair, updateSelection}= $props();
+	import { onMount } from 'svelte';
+	let { top, left, height, width, group, name, index, pair, updateSelection, selectedColor } =
+		$props();
 	let divElement;
 	let spanElement;
 
 	$effect(() => {
-
-
-		divElement.style.top=top +"px";
-		divElement.style.left=left +"px";
-		spanElement.style.width=width+"px";
-		spanElement.style.height=height+"px";
-		if(pair){
-			spanElement.class = spanElement.class + " dark"
+		divElement.style.top = top + 'px';
+		divElement.style.left = left + 'px';
+		spanElement.style.width = width + 'px';
+		spanElement.style.height = height + 'px';
+		if (pair) {
+			spanElement.class = spanElement.class + ' dark';
 		}
+		console.log(selectedColor);
 	});
 </script>
 
-	<div
-		class="option"
-		bind:this={divElement}
-		style:position="absolute"
-	>
-		<label>
-			<input type="radio" 
+<div class="option" bind:this={divElement} style:position="absolute">
+	<label>
+		<input
+			type="radio"
 			style:opacity="0"
 			style:cursor="pointer"
-			{name} value={index + 1} bind:group={group} 
-			onchange={updateSelection}/>
-			<span
-				class="checkmark {pair ? 'dark' : ''}"
-				bind:this={spanElement}
-		
-				style:border-radius="100%"
-			></span>
-		</label>
-	</div>
+			{name}
+			value={index + 1}
+			bind:group
+			onchange={updateSelection}
+		/>
+		<span class="checkmark {pair ? 'dark' : ''}" bind:this={spanElement} style:border-radius="100%"
+		></span>
+	</label>
+</div>
+
 <style>
-
-	.tag {
-		position: absolute;
-		font-size: 1.5em;
-	}
-
 	.checkmark {
 		position: absolute;
 		height: 25px;
+		top: 0;
+		left: 0;
 		width: 25px;
 		background-color: #eee;
 		border-radius: 100%;
+	}
+	.option {
+		cursor: pointer;
+	}
+
+	.option input {
+		position: absolute;
+		opacity: 0;
+		cursor: pointer;
+		height: 25;
+		width: 25;
 	}
 
 	.option:hover input ~ .checkmark {
 		background-color: #ccc;
 	}
 	.option input:checked ~ .checkmark {
-		background-color: #2196f3;
+		background-color: var(--checked-color);
 	}
 
 	.dark {
